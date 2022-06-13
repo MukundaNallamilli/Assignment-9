@@ -1,0 +1,87 @@
+\documentclass{beamer}
+
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{setspace}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{color}
+\usepackage{array}
+\usepackage{calc} 
+\usepackage{bm}
+\usepackage{caption}
+\usepackage{float}
+
+\usetheme{CambridgeUS}
+\useoutertheme{infolines}
+%numbering
+\setbeamercolor{background canvas}{bg=white}
+\setbeamersize{text margin left=1cm,text margin right=1cm}
+
+\title[AI1110  Assignment-9]{ASSIGNMENT-9}
+\subtitle{AI1110}
+\author[]{MUKUNDA REDDY \\ AI21BTECH11021}
+\date
+
+\begin{document}
+  \begin{frame}
+      \titlepage
+  \end{frame}
+  
+  \begin{frame}{Outline}
+      \tableofcontents
+  \end{frame}
+  
+  \section{Question}
+  \begin{frame}{Exercise 9-39}
+  Find autocorrelation $R(\tau)$ ? if \\
+  \begin{center}
+  \begin{enumerate}[a]
+      \item $S(w) = \frac{1}{(1+w^{4})}$
+      \item $S(w) = \frac{1}{(4+w^{2})^{2}}$
+  \end{enumerate}
+  \end{center}
+  \end{frame}
+  
+  \section{Solution}
+  \subsection{Solution (a)}
+  \begin{frame}{Solution (a)}
+  \begin{align*}
+      S(s)  &= \frac{1}{1+s^{4}}  \\
+         &=  \frac{1}{(s^{2}+\sqrt{2}s+1)(s^{2}-\sqrt{2}s+1)}  \\
+  \end{align*}
+     Now we know that for the equation of kind
+     $y\prime\prime(t) +b y\prime(t) +cy(t) = x(t),
+     S_{xx} (w) = q$ Then
+     $$ S_{yy} (w) = \frac{q}{(c-w^{2})^{2}+b^{2}w^{2}} $$
+  \end{frame}
+
+   \begin{frame}{Solution (a)}
+       This is a special case with $b = \sqrt{2},c = 1$
+       i.e. $b^{2} < 4c$ so we have autocorrelation as
+       $$ R_{yy} ( \tau) = \frac{q}{2bc}e^{-\alpha |\tau|} \left( cos(\beta \tau) + \frac{\alpha}{\beta}sin(\beta |\tau|) \right),\alpha = \frac{b}{2} , {\alpha}^{2} + {\beta}^{2} = c $$
+       Subtituting we get 
+       $$R(\tau) = \frac{1}{2\sqrt{2}}e^{\frac{-|\tau|}{\sqrt{2}}}\left( cos(\frac{\tau}{\sqrt{2}}) + sin(\frac{|\tau|}{\sqrt{2}} ) \right)$$
+   \end{frame}
+   
+  \subsection{Solution (b)}
+  \begin{frame}{Solution (b)}
+      From the pair $e^{-2|\tau|} \xleftrightarrow \ \frac{4}{4+w^{2}}$ and it follows that
+      $e^{-2|\tau|}*e^{-2|\tau|} \xleftrightarrow \ \frac{16}{(4+w^{2})^{2}}$ hence for $\tau>0$
+      \begin{align*}
+          16 R(\tau) &= \int_{-\infty}^{\infty} e^{-2|x|}e^{-2|\tau-x|} dx  \\
+          &= \int_{-\infty}^{0} e^{-2x}e^{-2(\tau-x)} dx +\int_{0}^{\tau} e^{-2x}e^{-2(\tau-x)} dx  \\
+          &+ \int_{\tau}^{\infty} e^{-2x}e^{2(\tau-x)} dx \\
+          &=  \frac{1}{2}e^{-2\tau}(1+2\tau)
+      \end{align*}
+  \end{frame}
+  
+  \begin{frame}{Solution (b)}
+      after simplification we are left with the autocorrelation ,
+      $$R (\tau) = \frac{1}{32}e^{-2\tau}(1+2\tau) $$
+  \end{frame}
+  
+\end{document}
